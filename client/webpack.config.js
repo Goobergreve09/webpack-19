@@ -19,12 +19,19 @@ module.exports = () => {
         template: './index.html',
         filename: 'index.html',
       }),
+      new InjectManifest({
+        swSrc: './src-sw.js',
+        swDest: 'src-sw.js',
+      }),
       new WebpackPwaManifest({
         name: 'Text Editor',
         short_name: 'Text Editor',
         description: 'A simple text editor application',
         background_color: '#ffffff',
         theme_color: '#2196f3',
+        inject: true,
+        start_url: "./",
+        publicPath: "./",
         icons: [
           {
             src: path.resolve('src/assets/icon.png'),
@@ -32,10 +39,6 @@ module.exports = () => {
             destination: path.join('assets', 'icons'),
           },
         ],
-      }),
-      new InjectManifest({
-        swSrc: './src-sw.js',
-        swDest: 'service-worker.js',
       }),
     ],
     module: {
@@ -51,6 +54,7 @@ module.exports = () => {
             loader: 'babel-loader',
             options: {
               presets: ['@babel/preset-env'],
+              plugins: ['@babel/plugin-proposal-object-rest-spread', '@babel/transform-runtime']
             },
           },
         },
