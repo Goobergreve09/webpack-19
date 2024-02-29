@@ -17,24 +17,25 @@ module.exports = () => {
     plugins: [
       new HtmlWebpackPlugin({
         template: './index.html',
-        filename: 'index.html',
+       title: 'JATE',
       }),
       new InjectManifest({
         swSrc: './src-sw.js',
         swDest: 'src-sw.js',
       }),
       new WebpackPwaManifest({
+        fingerprints: false,
         name: 'Text Editor',
         short_name: 'Text Editor',
         description: 'A simple text editor application',
         background_color: '#ffffff',
         theme_color: '#2196f3',
         inject: true,
-        start_url: "./",
-        publicPath: "./",
+        start_url: "/",
+        publicPath: "/",
         icons: [
           {
-            src: path.resolve('src/assets/icon.png'),
+            src: path.resolve('src/images/logo.png'),
             sizes: [96, 128, 192, 256, 384, 512],
             destination: path.join('assets', 'icons'),
           },
